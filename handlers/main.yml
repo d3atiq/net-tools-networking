@@ -1,0 +1,9 @@
+---
+# handlers file for net-tools-networking
+
+- name: restart networking
+  become: true
+  service:
+    name: networking
+    state: restarted
+

@@ -1,0 +1,58 @@
+auto {{ item.interface }}
+{% if item.ipv4 is defined %}
+{% if item.ipv4.configured is defined and item.ipv4.configured %}
+{% if item.ipv4.address is defined and item.ipv4.address %}
+iface {{ item.interface }} inet static
+{% else %}
+iface {{ item.interface }} inet dhcp
+{% endif %}
+{% if item.ipv4.address is defined and item.ipv4.address %}
+	address {{ (item.ipv4.address | ipaddr('address')) }}
+	netmask {{ (item.ipv4.address | ipaddr('netmask')) }}
+	network {{ (item.ipv4.address | ipaddr('network')) }}
+	broadcast {{ (item.ipv4.address | ipaddr('broadcast')) }}
+{% if item.ipv4.gateway is defined and item.ipv4.gateway %}
+	gateway {{ item.ipv4.gateway }}
+{% endif %}
+{% if item.dns is defined %}
+{% if item.dns.nameservers is defined and item.dns.nameservers %}
+	dns-nameservers {% for ns in item.dns.nameservers %} {% if (ns | ipaddr('ipv4')) %} {{ ns }} {% endif %} {% endfor %} 
+{% endif %}
+{% if item.dns.searchdomains is defined and item.dns.searchdomains %}
+	dns-search {% for sd in item.dns.searchdomains %} {{ sd }} {% endfor %} 
+{% endif %}
+{% endif %}
+{% endif %}
+{% else %}
+iface {{ item.interface }} inet manual 
+{% endif %}
+{% endif %}
+{% if item.ipv6 is defined %}
+{% if item.ipv6.configured is defined and item.ipv6.configured %}
+{% if item.ipv6.address is defined and item.ipv6.address %}
+iface {{ item.interface }} inet6 static
+{% else %}
+iface {{ item.interface }} inet6 dhcp
+{% endif %}
+{% if item.ipv6.address is defined and item.ipv6.address %}
+	address {{ (item.ipv6.address | ipaddr('address')) }}
+	netmask {{ (item.ipv6.address | ipaddr('prefix')) }}
+	network {{ (item.ipv6.address | ipaddr('network')) }}
+	broadcast {{ (item.ipv6.address | ipaddr('broadcast')) }}
+{% if item.ipv6.gateway is defined and item.ipv6.gateway %}
+	gateway {{ item.ipv6.gateway }}
+{% endif %}
+{% if item.dns is defined %}
+{% if item.dns.nameservers is defined and item.dns.nameservers %}
+	dns-nameservers {% for ns in item.dns.nameservers %} {% if (ns | ipaddr('ipv6')) %} {{ ns }} {% endif %} {% endfor %} 
+{% endif %}
+{% if item.dns.searchdomains is defined and item.dns.searchdomains %}
+	dns-search {% for sd in item.dns.searchdomains %} {{ sd }} {% endfor %} 
+{% endif %}
+{% endif %}
+{% endif %}
+{% else %}
+iface {{ item.interface }} inet6 manual 
+{% endif %}
+{% endif %}
+
