@@ -14,7 +14,7 @@
 
 - name: Configure network interface
   become: true
-  shell: "ip a flush dev {{ item }}"
+  shell: "ip a flush {{ item }}"
   with_items: "{{ interfaces }}"
 
 - name: Configure network interface
