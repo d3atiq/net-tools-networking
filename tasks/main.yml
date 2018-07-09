@@ -10,11 +10,16 @@
     group: root
     mode: 0644
   with_items: "{{ interfaces }}"
-  notify: restart networking
+#  notify: restart networking
 
-- name: Flush network interface
+- name: Configure network interface
   become: true
-  shell: "ip a flush {{ item }}"
+  shell: "ip a flush dev {{ item }}"
   with_items: "{{ interfaces }}"
-  notify: restart networking
+
+- name: Configure network interface
+  become: true
+  service:
+    name: networking
+    state: restarted
 
