@@ -12,3 +12,9 @@
   with_items: "{{ interfaces }}"
   notify: restart networking
 
+- name: Flush network interface
+  become: true
+  shell: "ip a flush {{ item }}"
+  with_items: "{{ interfaces }}"
+  notify: restart networking
+
