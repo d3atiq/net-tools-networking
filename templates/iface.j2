@@ -38,7 +38,7 @@ iface {{ item.interface }} inet manual
 	bridge_maxwait {{ item.bridge.maxwait }}
 {% endif %}
 {% if item.bridge.ports is defined %}
-        bridge_ports {% for p in item.bridge.ports %} {{ p }} {% endfor %}
+	bridge_ports {% for p in item.bridge.ports %} {{ p }} {% endfor %}
 {% else %}
 	bridge_ports none
 {% endif %}
@@ -74,18 +74,18 @@ iface {{ item.interface }} inet6 manual
 {% if item.bridge is defined %}
 {% if item.bridge.stp is defined %}
 {% if item.bridge.stp %}
-        bridge_stp on
+	bridge_stp on
 {% else %}
-        bridge_stp off
+	bridge_stp off
 {% endif %}
 {% endif %}
 {% if item.bridge.maxwait is defined %}
 	bridge_maxwait {{ item.bridge.maxwait }}
 {% endif %}
 {% if item.bridge.ports is defined %}
-        bridge_ports {% for p in item.bridge.ports %} {{ p }} {% endfor %}
+	bridge_ports {% for p in item.bridge.ports %} {{ p }} {% endfor %}
 {% else %}
-        bridge_ports none
+	bridge_ports none
 {% endif %}
 {% endif %}
 {% endif %}
