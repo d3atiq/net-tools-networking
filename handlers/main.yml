@@ -6,4 +6,3 @@
   service:
     name: networking
     state: restarted
-
