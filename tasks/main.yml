@@ -8,7 +8,7 @@
     name: ifupdown
     state: present
 
-- name: Configure network interface
+- name: Create network interface configuration
   become: true
   template:
     src: iface.j2
@@ -19,12 +19,18 @@
   with_items: "{{ interfaces }}"
 #  notify: restart networking
 
+- name: Effect network interface creation if necessary
+  become: true
+  service:
+    name: networking
+    state: restarted
+
 - name: Flush network address
   become: true
   shell: "ip a flush {{ item.interface }}"
   with_items: "{{ interfaces }}"
 
-- name: Configure network interface
+- name: Effect network interface changes
   become: true
   service:
     name: networking
