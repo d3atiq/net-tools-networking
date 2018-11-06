@@ -1,21 +1,21 @@
 ---
 # tasks file for net-tools-networking
 
-#- name: Install ifupdown
-#  become: true
-#  apt:
-#    update_cache: true
-#    name: ifupdown
-#    state: present
-#
-- name: Gather installed package information
-  package_facts:
-    manager: apt
+- name: Install ifupdown
+  become: true
+  apt:
+    update_cache: true
+    name: ifupdown
+    state: present
 
-- name: Ensure ifupdown is installed (cannot install now as network might not be up)
-  fail:
-    msg: "Package ifupdown not installed. Please install it or consider using netplan."
-    when: '{{ ansible_distribution_release }} == "bionic" and "ifupdown" not in ansible_facts.packages'
+#- name: Gather installed package information
+#  package_facts:
+#    manager: apt
+#
+#- name: Ensure ifupdown is installed (cannot install now as network might not be up)
+#  fail:
+#    msg: "Package ifupdown not installed. Please install it or consider using netplan."
+#    when: '{{ ansible_distribution_release }} == "bionic" and "ifupdown" not in ansible_facts.packages'
 
 - name: Create network interface configuration
   become: true
