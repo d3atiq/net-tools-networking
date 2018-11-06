@@ -1,13 +1,13 @@
 ---
 # tasks file for net-tools-networking
 
-- name: Install ifupdown
-  become: true
-  apt:
-    update_cache: true
-    name: ifupdown
-    state: present
-
+#- name: Install ifupdown
+#  become: true
+#  apt:
+#    update_cache: true
+#    name: ifupdown
+#    state: present
+#
 #- name: Gather installed package information
 #  package_facts:
 #    manager: apt
