@@ -1,6 +1,13 @@
 ---
 # tasks file for net-tools-networking
 
+- name: Install ifupdown
+  become: true
+  apt:
+    update_cache: true
+    name: ifupdown
+    state: present
+
 - name: Configure network interface
   become: true
   template:
