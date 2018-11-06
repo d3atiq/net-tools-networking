@@ -10,6 +10,7 @@
 #
 - name: Gather installed package information
   package_facts:
+    manager: apt
 
 - name: Ensure ifupdown is installed (cannot install now as network might not be up)
   fail:
