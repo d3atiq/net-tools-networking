@@ -28,19 +28,35 @@
   with_items: "{{ interfaces }}"
 #  notify: restart networking
 
-- name: Effect network interface creation if necessary
+- name: Restart network
   become: true
   service:
     name: networking
     state: restarted
+  when: "{{ ansible_distribution_release }}" == 'xenial'
 
-- name: Flush network address
+- name: Restart network
+  become: true
+  service:
+    name: [ 'systemd-networkd', 'systemd-resolved']
+    state: restarted
+  when: "{{ ansible_distribution_release }}" == 'bionic'
+
+- name: Remove network addresses
   become: true
   shell: "ip a flush {{ item.interface }}"
   with_items: "{{ interfaces }}"
 
-- name: Effect network interface changes
+- name: Restart network
   become: true
   service:
     name: networking
     state: restarted
+  when: "{{ ansible_distribution_release }}" == 'xenial'
+
+- name: Restart network
+  become: true
+  service:
+    name: [ 'systemd-networkd', 'systemd-resolved']
+    state: restarted
+  when: "{{ ansible_distribution_release }}" == 'bionic'
