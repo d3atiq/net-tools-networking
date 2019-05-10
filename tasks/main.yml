@@ -38,8 +38,11 @@
 - name: Restart network
   become: true
   service:
-    name: [ systemd-networkd, systemd-resolved ]
+    name: "{{ item }}"
     state: restarted
+  with_items:
+    - systemd-networkd
+    - systemd-resolved
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
 
 - name: Remove network addresses
@@ -57,6 +60,9 @@
 - name: Restart network
   become: true
   service:
-    name: [ systemd-networkd, systemd-resolved ]
+    name: "{{ item }}"
     state: restarted
+  with_items:
+    - systemd-networkd
+    - systemd-resolved
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
