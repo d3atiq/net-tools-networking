@@ -38,7 +38,7 @@
 - name: Restart network
   become: true
   service:
-    name: [ 'systemd-networkd', 'systemd-resolved']
+    name: [ systemd-networkd, systemd-resolved ]
     state: restarted
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
 
@@ -57,6 +57,6 @@
 - name: Restart network
   become: true
   service:
-    name: [ 'systemd-networkd', 'systemd-resolved']
+    name: [ systemd-networkd, systemd-resolved ]
     state: restarted
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
