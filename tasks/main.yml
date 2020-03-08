@@ -28,23 +28,23 @@
   with_items: "{{ interfaces }}"
 #  notify: restart networking
 
-#- name: Restart network
-#  become: true
-#  service:
-#    name: networking
-#    state: restarted
-#  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+- name: Restart network
+  become: true
+  service:
+    name: networking
+    state: restarted
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
 
-#- name: Restart network
-#  become: true
-#  service:
-#    name: "{{ item }}"
-#    state: restarted
-#  with_items:
-#    - systemd-networkd
-#    - systemd-resolved
-#    - networking
-#  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
+- name: Restart network
+  become: true
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - systemd-networkd
+    - systemd-resolved
+    - networking
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
 
 - name: Remove network addresses
   become: true
