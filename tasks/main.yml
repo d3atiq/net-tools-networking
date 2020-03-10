@@ -1,16 +1,11 @@
 ---
 # tasks file for net-tools-networking
 
-- name: Gather installed package information
-  become: true
-  package_facts:
-
 - name: Install ifupdown
   become: true
   apt:
     name: ifupdown
     state: present
-    when: "'ifupdown' not in ansible_facts.packages"
 
 - name: Source interfaces.d
   become: true
