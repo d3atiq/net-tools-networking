@@ -19,6 +19,7 @@
 - name: Enable and unmask networking service
   become: true
   systemd:
+    name: networking
     masked: no
     enabled: yes
     state: restarted
