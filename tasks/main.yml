@@ -10,7 +10,7 @@
     update_cache: true
     name: ifupdown
     state: present
-    when: "ifupdown" not in ansible_facts.packages
+    when: 'ifupdown' not in ansible_facts.packages
 
 - name: Source interfaces.d
   become: true
